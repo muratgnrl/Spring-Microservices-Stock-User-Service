@@ -1,0 +1,26 @@
+server:
+  port: 3020
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    serviceUrl:
+      defaultZone: http://localhost:8761/eurekaProjebes/
+spring:
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lowerCaseServiceId: true
+      routes:
+        - id: authspring
+          uri: http://localhost:7070/authspring/
+          predicates:
+            - Path= /authspring/**
+            #==========================
+        - id: stoksmarket
+          uri: http://localhost:7080/stoksmarket/
+          predicates:
+            - Path= /stoksmarket/**
+            #==========================
